@@ -12,13 +12,13 @@ function App() {
   // Define the possible statuses for better type safety
 
   function buyStars() {
-    const botUsername = "@m3700_bot"; // Replace with your bot's username
+    const botUsername = "m3700_bot"; // Replace with your bot's username
     if (!botUsername) {
       console.error("Bot username is not defined.");
       return;
     }
 
-    const invoiceLink = `https://t.me/${botUsername}?start=invoice_${37}`;
+    const invoiceLink = `https://t.me/m3700_bot?start`;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     WebApp.openInvoice(invoiceLink, (status: any) => {
