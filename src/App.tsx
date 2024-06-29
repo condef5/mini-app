@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
@@ -8,20 +8,11 @@ import WebApp from "@twa-dev/sdk";
 
 function App() {
   const [count, setCount] = useState(0);
-
-  // Define the possible statuses for better type safety
+  const [link, setLink] = useState("");
 
   function buyStars() {
-    const botUsername = "m3700_bot"; // Replace with your bot's username
-    if (!botUsername) {
-      console.error("Bot username is not defined.");
-      return;
-    }
-
-    const invoiceLink = `https://t.me/m3700_bot?start`;
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    WebApp.openInvoice(invoiceLink, (status: any) => {
+    WebApp.openInvoice(link, (status: any) => {
       switch (status) {
         case "paid":
           console.log("Payment successful");
@@ -69,7 +60,20 @@ function App() {
         >
           Show Alert
         </button>
-        <button onClick={() => buyStars()}>Open</button>
+
+        <br />
+
+        <input
+          placeholder="Set link"
+          type="text"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            console.log("input changed");
+
+            // set the link with input value
+            setLink(event.target.value);
+          }}
+        />
+        <button onClick={() => buyStars()}>Pay with start</button>
       </div>
     </>
   );
