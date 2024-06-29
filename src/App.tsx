@@ -69,7 +69,7 @@ function App() {
         >
           Show Alert
         </button>
-        <button onClick={() => buyStars()}>Show Payments</button>
+        <button onClick={() => buyStars()}>Open</button>
       </div>
     </>
   );
