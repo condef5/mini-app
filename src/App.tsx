@@ -9,24 +9,36 @@ import WebApp from "@twa-dev/sdk";
 function App() {
   const [count, setCount] = useState(0);
 
-  function buyStars(amount: number) {
-    WebApp.showConfirm(
-      `Do you want to purchase ${amount} stars?`,
-      (confirmed) => {
-        if (confirmed) {
-          // User confirmed the purchase
-          WebApp.sendData(
-            JSON.stringify({
-              action: "buy_stars",
-              amount: amount,
-            })
-          );
-        } else {
-          // User canceled the purchase
-          console.log("Purchase canceled");
-        }
+  // Define the possible statuses for better type safety
+
+  function buyStars() {
+    const botUsername = "@m3700_bot"; // Replace with your bot's username
+    if (!botUsername) {
+      console.error("Bot username is not defined.");
+      return;
+    }
+
+    const invoiceLink = `https://t.me/${botUsername}?start=invoice_${37}`;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    WebApp.openInvoice(invoiceLink, (status: any) => {
+      switch (status) {
+        case "paid":
+          console.log("Payment successful");
+          // Handle successful payment (e.g., update UI, send confirmation to server)
+          break;
+        case "failed":
+          console.log("Payment failed");
+          // Handle failed payment (e.g., show error message)
+          break;
+        case "cancelled":
+          console.log("Payment cancelled");
+          // Handle cancelled payment (e.g., ask user if they want to try again)
+          break;
+        default:
+          console.error("Unknown payment status:", status);
       }
-    );
+    });
   }
 
   return (
@@ -57,7 +69,7 @@ function App() {
         >
           Show Alert
         </button>
-        <button onClick={() => buyStars(3)}>Show Payments</button>
+        <button onClick={() => buyStars()}>Show Payments</button>
       </div>
     </>
   );
