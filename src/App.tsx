@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
@@ -9,6 +9,18 @@ import WebApp from "@twa-dev/sdk";
 function App() {
   const [count, setCount] = useState(0);
   const [link, setLink] = useState("");
+
+  useEffect(() => {
+    // Initialize Telegram WebApp
+    const data = JSON.stringify({
+      eventType: "web_app_setup_back_button",
+      eventData: {
+        is_visible: true,
+      },
+    });
+
+    window.parent.postMessage(data, "https://web.telegram.org");
+  }, []);
 
   function buyStars() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
