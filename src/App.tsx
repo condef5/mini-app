@@ -4,7 +4,6 @@ import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import WebApp from "@twa-dev/sdk";
-import { postEvent } from "@tma.js/sdk";
 import { setupTelegramWebAppClosingConfirmation } from "./lib";
 
 function App() {
@@ -13,7 +12,7 @@ function App() {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    postEvent("web_app_setup_closing_behavior", { need_confirmation: true });
+    // postEvent("web_app_setup_closing_behavior", { need_confirmation: true });
   }, []);
 
   function buyStars() {
@@ -85,7 +84,9 @@ function App() {
             await setupTelegramWebAppClosingConfirmation(!enabled);
             setEnabled(!enabled);
           }}
-        >Enable --- {enabled ? "enabled" : "disabled"}</button>
+        >
+          Enable --- {enabled}
+        </button>
       </div>
     </>
   );
