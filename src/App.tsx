@@ -3,23 +3,15 @@ import reactLogo from "./assets/react.svg";
 import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
 import "./App.css";
-
 import WebApp from "@twa-dev/sdk";
+import { postEvent } from "@tma.js/sdk";
 
 function App() {
   const [count, setCount] = useState(0);
   const [link, setLink] = useState("");
 
   useEffect(() => {
-    // Initialize Telegram WebApp
-    const data = JSON.stringify({
-      eventType: "web_app_setup_back_button",
-      eventData: {
-        is_visible: true,
-      },
-    });
-
-    window.parent.postMessage(data, "https://web.telegram.org");
+    postEvent("web_app_setup_closing_behavior", { need_confirmation: true });
   }, []);
 
   function buyStars() {
