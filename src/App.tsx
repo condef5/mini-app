@@ -5,10 +5,12 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import WebApp from "@twa-dev/sdk";
 import { postEvent } from "@tma.js/sdk";
+import { setupTelegramWebAppClosingConfirmation } from "./lib";
 
 function App() {
   const [count, setCount] = useState(0);
   const [link, setLink] = useState("");
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
     postEvent("web_app_setup_closing_behavior", { need_confirmation: true });
@@ -78,6 +80,12 @@ function App() {
           }}
         />
         <button onClick={() => buyStars()}>Pay with start</button>
+        <button
+          onClick={async () => {
+            await setupTelegramWebAppClosingConfirmation(!enabled);
+            setEnabled(!enabled);
+          }}
+        >Enable --- {enabled ? "enabled" : "disabled"}</button>
       </div>
     </>
   );
