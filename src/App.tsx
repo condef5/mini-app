@@ -12,6 +12,7 @@ function App() {
   const [link, setLink] = useState("");
   const [enabled, setEnabled] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [result, setResult] = useState({});
 
   function click() {
     if (clicked) return;
@@ -19,6 +20,15 @@ function App() {
     setClicked(true);
     sounds.bgMusic.play();
   }
+
+  function stopBgMusic() {
+    sounds.bgMusic.stop();
+  }
+
+  WebApp.onEvent("viewportChanged", function (data) {
+    setResult(data);
+    stopBgMusic();
+  });
 
   useEffect(() => {
     // postEvent("web_app_setup_closing_behavior", { need_confirmation: true });
@@ -64,6 +74,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        {JSON.stringify(result || "")}
       </div>
       {/*  */}
       <div className="card">
