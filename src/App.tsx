@@ -27,11 +27,24 @@ function App() {
 
   WebApp.onEvent("viewportChanged", function (data) {
     setResult(data);
-    stopBgMusic();
+    // stopBgMusic();
   });
 
   useEffect(() => {
-    // postEvent("web_app_setup_closing_behavior", { need_confirmation: true });
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopBgMusic();
+      } else {
+        sounds.bgMusic.play();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   function buyStars() {
