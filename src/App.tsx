@@ -5,11 +5,20 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import WebApp from "@twa-dev/sdk";
 import { setupTelegramWebAppClosingConfirmation } from "./lib";
+import { sounds } from "./sounds";
 
 function App() {
   const [count, setCount] = useState(0);
   const [link, setLink] = useState("");
   const [enabled, setEnabled] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  function click() {
+    if (clicked) return;
+
+    setClicked(true);
+    sounds.bgMusic.play();
+  }
 
   useEffect(() => {
     // postEvent("web_app_setup_closing_behavior", { need_confirmation: true });
@@ -39,7 +48,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div onClick={() => click()}>
         <a href="https://ton.org/dev" target="_blank">
           <img src={twaLogo} className="logo" alt="TWA logo" />
         </a>

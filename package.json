@@ -12,7 +12,9 @@
   "dependencies": {
     "@tma.js/sdk": "^2.6.0",
     "@twa-dev/sdk": "^6.7.1",
+    "@types/howler": "^2.2.11",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "howler": "^2.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
