@@ -21,9 +21,6 @@ function App() {
     sounds.bgMusic.play();
   }
 
-  function stopBgMusic() {
-    sounds.bgMusic.pause();
-  }
 
   WebApp.onEvent("viewportChanged", function (data) {
     setResult(data);
