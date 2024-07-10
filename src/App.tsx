@@ -4,7 +4,7 @@ import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import WebApp from "@twa-dev/sdk";
-import { setupTelegramWebAppClosingConfirmation } from "./lib";
+import { openLink, setupTelegramWebAppClosingConfirmation } from "./lib";
 import { sounds } from "./sounds";
 
 function App() {
@@ -20,7 +20,6 @@ function App() {
     setClicked(true);
     sounds.bgMusic.play();
   }
-
 
   WebApp.onEvent("viewportChanged", function (data) {
     setResult(data);
@@ -80,10 +79,10 @@ function App() {
         </a>
         <button
           onClick={() => {
-            WebApp.openLink("https://www.youtube.com/watch?v=js_0B1T6I7Q");
+            openLink("https://www.youtube.com/watch?v=js_0B1T6I7Q");
           }}
         >
-          click here bro
+          click here brossss
         </button>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
