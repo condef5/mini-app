@@ -22,7 +22,7 @@ function App() {
   }
 
   function stopBgMusic() {
-    sounds.bgMusic.stop();
+    sounds.bgMusic.pause();
   }
 
   WebApp.onEvent("viewportChanged", function (data) {
@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        stopBgMusic();
+        sounds.bgMusic.pause();
       } else {
         sounds.bgMusic.play();
       }
@@ -78,6 +78,16 @@ function App() {
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+        <button
+          onClick={() => {
+            WebApp.openLink("https://www.youtube.com/watch?v=js_0B1T6I7Q");
+          }}
+        >
+          click here bro
+        </button>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
