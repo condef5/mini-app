@@ -79,7 +79,7 @@ function App() {
         </a>
         <button
           onClick={() => {
-            openLink("https://www.youtube.com/watch?v=js_0B1T6I7Q");
+            openLink("tg://");
           }}
         >
           click here brossss
