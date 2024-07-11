@@ -79,10 +79,11 @@ function App() {
         </a>
         <button
           onClick={() => {
-            window.location.href = "tg://";
+            window.close();
+            opener.open("tg://", "_blank");
           }}
         >
-          Loop 35
+          With close
         </button>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
