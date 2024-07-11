@@ -4,7 +4,7 @@ import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import WebApp from "@twa-dev/sdk";
-import { openLink, setupTelegramWebAppClosingConfirmation } from "./lib";
+import { setupTelegramWebAppClosingConfirmation } from "./lib";
 import { sounds } from "./sounds";
 
 function App() {
