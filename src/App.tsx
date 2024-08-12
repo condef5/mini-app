@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
 import twaLogo from "./assets/tapps.png";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -7,12 +6,31 @@ import WebApp from "@twa-dev/sdk";
 import { setupTelegramWebAppClosingConfirmation } from "./lib";
 import { sounds } from "./sounds";
 
+declare global {
+  interface Window {
+    Telegram: {
+      WebApp: {
+        initData: string;
+      };
+    };
+  }
+}
+
 function App() {
   const [count, setCount] = useState(0);
   const [link, setLink] = useState("");
   const [enabled, setEnabled] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [result, setResult] = useState({});
+  const [startAppParams, setStartAppParams] = useState<string | null>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const tg = window.Telegram.WebApp;
+    const initData = new URLSearchParams(tg.initData);
+    const startParam = initData.get("start_param");
+    setStartAppParams(startParam);
+  }, []);
 
   function click() {
     if (clicked) return;
@@ -74,22 +92,8 @@ function App() {
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-        <button
-          onClick={() => {
-            window.close();
-            opener.open("tg://", "_blank");
-          }}
-        >
-          With close
-        </button>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
       </div>
-      <h1>Events 19:57</h1>
+      <h1>Telegram params: {startAppParams ?? []}</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
